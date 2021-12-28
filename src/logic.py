@@ -37,13 +37,15 @@ def display_pet_container(row):
 def filter_dataframe(df):
     ratings = ["Children", "Dogs", "Cats", "Home Alone", "Activity"]
     for rating in ratings:
-        # lower_limit = st.session_state[rating][0]
-        # upper_limit = st.session_state[rating][1]
-        # df = df[df[rating] >= lower_limit]
-        # df = df[df[rating] <= upper_limit]
-        limit = st.session_state[rating]
-        df = df[df[rating] >= limit]
+        lower_limit = st.session_state[rating][0]
+        upper_limit = st.session_state[rating][1]
+        df = df[df[rating] >= lower_limit]
+        df = df[df[rating] <= upper_limit]
+        # limit = st.session_state[rating]
+        # df = df[df[rating] >= limit]
 
     df = df[df["Age Filter"] >= st.session_state["Age Filter"]]
+    df = df[df["Weight"] >= st.session_state["Weight"][0]]
+    df = df[df["Weight"] <= st.session_state["Weight"][1]]
     
     return df

@@ -8,35 +8,44 @@ st.header("PAWS Pets Available for Fostering")
 st.write("\n\n\n")
 df = pd.read_csv("pets_available_for_fostering.csv")
 df.set_index("Name", inplace=True)
-st.write(df)
+# st.write(df)
 
 
-# Sidebar
-st.sidebar.header("Filter")
-msg = """
-    Limit your search to pups with ratings of at least this much. 
-    Note: if a dog is listed with a rating of zero it means that rating is 
-    unknown.
-"""
-st.sidebar.write(msg)
-for rating in ["Children", "Dogs", "Cats", "Home Alone", "Activity"]:
-    st.sidebar.slider(
-        rating, 
-        value=0, 
-        # value=(0,5),
+# Filters
+with st.expander("Filters", expanded=True):
+    msg = """
+        Limit your search to pups with ratings of at least this much. 
+        Note: if a dog is listed with a rating of zero it means that rating is 
+        unknown.
+    """
+    st.write(msg)
+    for rating in ["Children", "Dogs", "Cats", "Home Alone", "Activity"]:
+        st.slider(
+            rating, 
+            # value=0, 
+            value=(0,5),
+            min_value=0, 
+            max_value=5, 
+            format = "%f paws",
+            key=rating
+            )
+
+    st.slider("Age", 
+        value=1, 
         min_value=0, 
-        max_value=5, 
-        format = "%f paws",
-        key=rating
-        )
+        max_value=int(df["Age Filter"].max()),
+        format = "%f years",
+        key="Age Filter",
+    )
 
-st.sidebar.slider("Age", 
-    value=1, 
-    min_value=0, 
-    max_value=int(df["Age Filter"].max()),
-    format = "%f years",
-    key="Age Filter",
-)
+    max_weight = int(df["Weight"].max())
+    st.slider("Weight", 
+        value=(0, max_weight), 
+        min_value=0,
+        max_value=max_weight+1,
+        format = "%f lbs",
+        key="Weight",
+        )
 
 # print(st.session_state)
 filtered_df = lg.filter_dataframe(df)
