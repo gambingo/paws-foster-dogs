@@ -2,7 +2,8 @@ import streamlit as st
 
 
 def pet_container(row):
-    st.subheader(row.name)
+    link = "https://www.pawschicago.org" + row["Link"]
+    st.subheader(f"[{row.name}]({link})")
     col1, col2, col3 = st.columns([2, 3, 3])
     
     col1.image(row["Image"])
@@ -11,7 +12,7 @@ def pet_container(row):
         - {row['Breed']}
         - {row['Age']}
         - {row['Gender']}
-        - {row['Weight']}
+        - {row['Weight']} lbs.
         - {row['Location']}
     """
     col2.markdown(details)

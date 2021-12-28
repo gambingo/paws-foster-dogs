@@ -121,6 +121,24 @@ def scrape_facts(soup):
     return data_found
 
 
+def clean_dataframe(df):
+    df["Weight"] = df["Weight"].apply(
+        lambda x: float(x.replace("lbs", ""))
+    )
+
+    df["Age Filter"] = df["Age"].apply(
+        lambda 
+    )
+
+
+def numeric_age(string_age):
+    if "Year" in string_age:
+        return float(string_age.split(" ")[0])
+    if "Month" in string_age:
+        return float(string_age.split(" ")[0])/12
+
+
+
 if __name__ == '__main__':
     df = build_dataframe()
-    df.to_pickle("pets_available_for_fostering.pkl")
+    df.to_csv("pets_available_for_fostering.csv")

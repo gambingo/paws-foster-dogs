@@ -6,7 +6,8 @@ import src.logic as lg
 
 st.header("PAWS Pets Available for Fostering")
 st.write("\n\n\n")
-df = pd.read_pickle("pets_available_for_fostering.pkl")
+df = pd.read_csv("pets_available_for_fostering.csv")
+df.set_index("Name", inplace=True)
 st.write(df)
 
 
@@ -35,7 +36,7 @@ for rating in ["Children", "Dogs", "Cats", "Home Alone", "Activity"]:
     #     value=["Unknown", "5 paws"],
     #     key=f"{rating}_select")
 
-print(st.session_state)
+# print(st.session_state)
 filtered_df = lg.filter_dataframe(df)
 
 
