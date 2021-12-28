@@ -14,8 +14,8 @@ df.set_index("Name", inplace=True)
 # Filters
 with st.expander("Filters", expanded=True):
     msg = """
-        Limit your search to pups with ratings of at least this much. 
-        Note: if a dog is listed with a rating of zero it means that rating is 
+        Limit your search to pups within these ratings. 
+        Note: If a dog is listed with a rating of zero it means that rating is 
         unknown.
     """
     st.write(msg)
