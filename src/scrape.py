@@ -127,8 +127,10 @@ def clean_dataframe(df):
     )
 
     df["Age Filter"] = df["Age"].apply(
-        lambda 
+        lambda x: numeric_age(x)
     )
+
+    return df
 
 
 def numeric_age(string_age):
@@ -141,4 +143,6 @@ def numeric_age(string_age):
 
 if __name__ == '__main__':
     df = build_dataframe()
+    # df = pd.read_csv("pets_available_for_fostering.csv")
+    df = clean_dataframe(df)
     df.to_csv("pets_available_for_fostering.csv")

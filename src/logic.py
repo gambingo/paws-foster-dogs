@@ -43,4 +43,7 @@ def filter_dataframe(df):
         # df = df[df[rating] <= upper_limit]
         limit = st.session_state[rating]
         df = df[df[rating] >= limit]
+
+    df = df[df["Age Filter"] >= st.session_state["Age Filter"]]
+    
     return df

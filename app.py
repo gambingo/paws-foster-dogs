@@ -30,11 +30,13 @@ for rating in ["Children", "Dogs", "Cats", "Home Alone", "Activity"]:
         key=rating
         )
 
-    # options = ["Unknown", "1 paw", "2 paws", "3 paw", "4 paws", "5 paws"]
-    # st.sidebar.select_slider(rating, 
-    #     options=options, 
-    #     value=["Unknown", "5 paws"],
-    #     key=f"{rating}_select")
+st.sidebar.slider("Age", 
+    value=1, 
+    min_value=0, 
+    max_value=int(df["Age Filter"].max()),
+    format = "%f years",
+    key="Age Filter",
+)
 
 # print(st.session_state)
 filtered_df = lg.filter_dataframe(df)
